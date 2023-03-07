@@ -1,9 +1,9 @@
-public class Animator
+public class Animator : AnimationHandler
 {
-    static Texture2D currentTexture = Character.animStates[0];
+    static Texture2D currentTexture = idle;
     float timer;
     int currentFrame;
-    int totalFrames = currentTexture.height / 88;
+    int totalFrames;
 
     protected Rectangle cutter = new Rectangle(0, 0, 58, 88);
     protected Vector2 aniVector = new Vector2();
@@ -12,8 +12,11 @@ public class Animator
 
     public void Anim()
     {
-        if (moving) currentTexture = Character.animStates[1];
-        else currentTexture = Character.animStates[0];
+        totalFrames = currentTexture.height / 88;
+
+        if (moving) currentTexture = walk;
+        else currentTexture = idle;
+
         timer += Raylib.GetFrameTime();
         if (timer >= 0.2f)
         {

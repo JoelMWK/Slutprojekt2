@@ -17,6 +17,7 @@ while (!Raylib.WindowShouldClose())
 {
     //Logik
     player.Update();
+    player.UpdateGun();
 
     //Grafik
     Raylib.BeginDrawing();

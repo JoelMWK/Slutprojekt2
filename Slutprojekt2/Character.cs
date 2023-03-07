@@ -1,15 +1,6 @@
 public class Character : Animator
 {
-    public static Texture2D[] animStates = {
-        Raylib.LoadTexture("./images/character/idle.png"),
-        Raylib.LoadTexture("./images/character/walk.png"),
-        Raylib.LoadTexture("./images/character/walkG.png"),
-    };
-    public static Texture2D animAction = Raylib.LoadTexture("./images/character/gun.png");
-
     protected Rectangle rect = new Rectangle(0, 0, 58, 88);
-    protected Rectangle gRect = new Rectangle(0, 0, 48, 11);
-
     int ground = 850;
     bool inAir = false;
     float gravity = 0;
@@ -55,10 +46,10 @@ public class Character : Animator
 
         if (Raylib.IsKeyDown(KeyboardKey.KEY_A)) { rect.x -= speed.X; direction.X = -1; moving = true; }
         if (Raylib.IsKeyDown(KeyboardKey.KEY_D)) { rect.x += speed.X; direction.X = 1; moving = true; }
+        if (Raylib.IsKeyReleased(KeyboardKey.KEY_D) || Raylib.IsKeyReleased(KeyboardKey.KEY_A)) moving = false;
     }
     public override void Draw()
     {
         base.Draw();
-        //Raylib.DrawTexture(animAction, (int)rect.x + 25, (int)rect.y + 45, Color.WHITE);
     }
 }
