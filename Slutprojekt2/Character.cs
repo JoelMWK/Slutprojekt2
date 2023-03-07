@@ -1,6 +1,6 @@
 public class Character : Animator
 {
-    protected Rectangle rect = new Rectangle(0, 0, 58, 88);
+    protected Rectangle rect = new Rectangle(0, 0, 46, 80);
     int ground = 850;
     bool inAir = false;
     float gravity = 0;
@@ -24,9 +24,9 @@ public class Character : Animator
     }
     public void CheckGround()
     {
-        if (rect.y + 88 >= ground)
+        if (rect.y + 80 >= ground)
         {
-            rect.y = ground - 88;
+            rect.y = ground - 80;
             gravity = 0;
             inAir = false;
         }

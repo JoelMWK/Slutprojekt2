@@ -1,23 +1,18 @@
 public class Player : Character
 {
-    Rectangle gRect;
+    Rectangle gRect = new Rectangle(0, 0, 48, 11);
     Vector2 pos;
-
-    public Player()
-    {
-        gRect = new Rectangle(0, 0, 48, 11);
-    }
+    float angle;
     public override void Draw()
     {
         base.Draw();
-        Raylib.DrawTexture(gun, (int)gRect.x, (int)gRect.y, Color.WHITE);
+        Raylib.DrawTextureEx(gun, new Vector2(gRect.x, gRect.y), angle, 1, Color.WHITE);
     }
     public void UpdateGun()
     {
-        gRect = new Rectangle(rect.x + 25, rect.y + 45, 48, 11);
         pos = Raylib.GetMousePosition();
-        float angle = MathF.Atan2(pos.X, pos.Y);
-
-        Raylib.DrawLine((int)rect.x, (int)rect.y, (int)pos.X, (int)pos.Y, Color.BLACK);
+        gRect = new Rectangle(rect.x + 30, rect.y + 45, 48, 11);
+        angle = MathF.Atan2(pos.Y - gRect.y, pos.X - gRect.x) * 180 / MathF.PI;
+        Raylib.DrawLine((int)rect.x + 30, (int)rect.y + 45, (int)pos.X, (int)pos.Y, Color.BLACK);
     }
 }
