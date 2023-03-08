@@ -6,7 +6,6 @@ public class Block
          Raylib.LoadTexture("./images/tile/dirt.png"),
     }; //Array av alla tiles texturer
 
-    public int blockHp = 3;
     public int Type { get; set; }
     public bool IsPassable { get; set; }
     private Texture2D blockTexture;
@@ -24,6 +23,7 @@ public class Block
     public void Draw()
     {
         Raylib.DrawTexture(blockTexture, (int)rect.x, (int)rect.y, Color.WHITE);
+        Raylib.DrawRectangleLines((int)rect.x, (int)rect.y, (int)rect.width, (int)rect.height, Color.BLACK);
     }
 
     public bool CheckCollisionCircle(Vector2 pos, float radius) //kollar kollision mellan en cirkel och rect

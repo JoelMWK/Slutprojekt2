@@ -9,6 +9,7 @@ Raylib.SetTargetFPS(60);
 
 
 Player player = new Player();
+Enemy enemy = new Enemy();
 Map map = new Map();
 map.LoadMap("./stages/stage1.json");
 
@@ -17,19 +18,18 @@ while (!Raylib.WindowShouldClose())
 {
     //Logik
     player.Update();
-    player.UpdateGun();
+    enemy.Update();
+    player.MapCollision();
+    enemy.MapCollision();
 
     //Grafik
     Raylib.BeginDrawing();
     Raylib.ClearBackground(Color.SKYBLUE);
 
-    Raylib.DrawCircle(750, 80, 50, Color.YELLOW);
-    Raylib.DrawCircle(720, 70, 10, Color.WHITE);
-    Raylib.DrawCircle(780, 70, 10, Color.WHITE);
-    Raylib.DrawRectangle(725, 100, 50, 8, Color.WHITE);
     Raylib.DrawRectangle(0, 500, 900, 50, Color.GRAY);
     map.DrawMap();
     player.Draw();
+    enemy.Draw();
 
     Raylib.EndDrawing();
 }

@@ -1,23 +1,29 @@
-public class Character : Animator
+public class Character
 {
-    public Rectangle rect = new Rectangle(0, 0, 46, 80);
-    int ground = 500;
-    public static bool inAir = false;
-    public static bool isAlive = true;
-    float gravity = 0;
+    protected Animator a = new Animator();
 
-    Vector2 speed = new Vector2(4, 8);
+    public Rectangle rect;
+    protected int ground = 500;
+    public bool inAir = false;
+    public bool isAlive = true;
+    protected float gravity = 0;
+
+    protected Vector2 speed = new Vector2(4, 8);
 
     public static Player p;
 
-    public void Update()
+    public virtual void Update()
     {
         SetGravity();
         CheckGround();
-        Movement();
-        Anim();
-        aniVector.X = rect.x;
-        aniVector.Y = rect.y;
+        a.Anim();
+        a.aniVector.X = rect.x;
+        a.aniVector.Y = rect.y;
+    }
+
+    public virtual void Draw()
+    {
+        a.Draw(this);
     }
 
     public void SetGravity()
@@ -27,32 +33,29 @@ public class Character : Animator
     }
     public void CheckGround()
     {
-        if (rect.y + 80 >= ground)
+        if (rect.y + rect.height >= ground)
         {
-            rect.y = ground - 80;
+            rect.y = ground - rect.height;
             gravity = 0;
             inAir = false;
         }
     }
-
-    public void Movement()
+    public void MapCollision()
     {
-        if (Raylib.IsKeyDown(KeyboardKey.KEY_SPACE) && !inAir)
+        foreach (Block block in Block.blockList)
         {
-            inAir = true;
-        }
+            if (block.CheckCollisionRecs(rect))
+            {
+                if (rect.y + rect.height > block.rect.y && rect.y < block.rect.y - block.rect.height)
+                {
+                    rect.y = block.rect.y - rect.height;
+                    gravity = 0;
+                    inAir = false;
+                }
 
-        if (inAir == true)
-        {
-            rect.y -= speed.Y;
+                else if (rect.x >= block.rect.x) rect.x += speed.X;
+                else if (rect.x <= block.rect.x) rect.x -= speed.X;
+            }
         }
-
-        if (Raylib.IsKeyDown(KeyboardKey.KEY_A)) { rect.x -= speed.X; direction.X = -1; moving = true; }
-        if (Raylib.IsKeyDown(KeyboardKey.KEY_D)) { rect.x += speed.X; direction.X = 1; moving = true; }
-        if (Raylib.IsKeyReleased(KeyboardKey.KEY_D) || Raylib.IsKeyReleased(KeyboardKey.KEY_A)) moving = false;
-    }
-    public override void Draw()
-    {
-        base.Draw();
     }
 }

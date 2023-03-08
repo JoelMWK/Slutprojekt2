@@ -1,27 +1,22 @@
 public class Animator : AnimationHandler
 {
-    static Texture2D currentTexture = spriteSheet;
+
+    public Texture2D currentTexture;
     Vector2 currentFrame;
     int totalFrames;
-    string name = "idle";
+    public string Name { get; set; } = "idle";
     float timer;
 
 
-    protected Rectangle source = new Rectangle(0, 0, 80, 80);
-    protected Vector2 aniVector = new Vector2();
-    protected Vector2 direction = new Vector2(1, 0);
-    protected bool moving = false;
+    public Rectangle source = new Rectangle(0, 0, 80, 80);
+    public Vector2 aniVector = new Vector2();
+    public Vector2 direction = new Vector2(1, 0);
+    public bool moving = false;
 
 
     public void Anim()
     {
-        if (moving && !Character.inAir) name = "run";
-        else if (Character.inAir) name = "jump";
-        else if (!Character.isAlive) name = "death";
-        else name = "idle";
-
-        Console.WriteLine(name);
-        totalFrames = (int)colRow[name].X * (int)source.width / 80;
+        totalFrames = (int)colRow[Name].X * (int)source.width / 80;
 
 
         timer += Raylib.GetFrameTime();
@@ -32,13 +27,15 @@ public class Animator : AnimationHandler
         }
 
         if (currentFrame.X > totalFrames) currentFrame.X = 0;
-        for (int i = 0; i < colRow.Count; i++) currentFrame.Y = colRow[name].Y;
+        for (int i = 0; i < colRow.Count; i++) currentFrame.Y = colRow[Name].Y;
 
         source.x = currentFrame.X * source.width;
         source.y = currentFrame.Y * source.height;
     }
-    public virtual void Draw()
+    public void Draw(Character c)
     {
-        Raylib.DrawTextureRec(currentTexture, new Rectangle(source.x, source.y, source.width * direction.X, source.height), aniVector, Color.WHITE);
+        //Raylib.DrawTextureRec(currentTexture, new Rectangle(source.x, source.y, source.width * direction.X, source.height), aniVector, Color.WHITE);
+
+        Raylib.DrawTexturePro(currentTexture, new Rectangle(source.x, source.y, source.width * direction.X, source.height), c.rect, Vector2.Zero, 0, Color.WHITE);
     }
 }
