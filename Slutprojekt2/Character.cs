@@ -1,11 +1,14 @@
 public class Character : Animator
 {
-    protected Rectangle rect = new Rectangle(0, 0, 46, 80);
-    int ground = 850;
-    bool inAir = false;
+    public Rectangle rect = new Rectangle(0, 0, 46, 80);
+    int ground = 500;
+    public static bool inAir = false;
+    public static bool isAlive = true;
     float gravity = 0;
 
     Vector2 speed = new Vector2(4, 8);
+
+    public static Player p;
 
     public void Update()
     {

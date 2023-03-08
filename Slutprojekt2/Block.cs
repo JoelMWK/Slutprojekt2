@@ -2,7 +2,8 @@ public class Block
 {
     public static List<Block> blockList = new List<Block>();
     private static Texture2D[] textures = {
-        Raylib.LoadTexture("./images/tile/concrete.png"),
+        Raylib.LoadTexture("./images/tile/grass.png"),
+         Raylib.LoadTexture("./images/tile/dirt.png"),
     }; //Array av alla tiles texturer
 
     public int blockHp = 3;

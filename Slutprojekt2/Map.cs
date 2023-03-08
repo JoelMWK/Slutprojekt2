@@ -9,7 +9,7 @@ public class Map
 
         for (int y = 0; y < m.Level.Length; y++) //Går igenom y-led 
         {
-            for (int x = 0; x < m.Level.Length; x++) //Går igenom x-led
+            for (int x = 0; x < m.Level[y].Length; x++) //Går igenom x-led
             {
                 if (m.Level[y][x] > 0) //Om något value är större än 0 utförs kodblocket. Annars är det luft
                 {
