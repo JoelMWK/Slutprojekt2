@@ -6,10 +6,9 @@ public class Character
     public bool inAir = false;
     public bool isAlive = true;
     protected float gravity = 0;
-
     protected Vector2 speed = new Vector2(4, 8);
-
     public static Player p;
+    public static Enemy e;
 
     public virtual void Update()
     {
@@ -39,26 +38,32 @@ public class Character
             inAir = false;
         }
     }
+
     public void MapCollision()
     {
+        Raylib.DrawText("pX: " + Character.p.rect.x, 10, 0, 20, Color.BLACK);
+        Raylib.DrawText("pY: " + Character.p.rect.y, 10, 20, 20, Color.BLACK);
+        Raylib.DrawText("Player Animation: " + Character.p.a.Name, 200, 20, 20, Color.BLACK);
+        Raylib.DrawText("Enemy Animation: " + Character.e.a.Name, 200, 40, 20, Color.BLACK);
+        Raylib.DrawText("eX: " + Character.e.rect.x, 10, 60, 20, Color.BLACK);
+        Raylib.DrawText("eY: " + Character.e.rect.y, 10, 80, 20, Color.BLACK);
+
         foreach (Block block in Block.blockList)
         {
             if (block.CheckCollisionRecs(rect))
             {
-                if (rect.y + rect.height > block.rect.y && rect.y < block.rect.y - block.rect.height)
+
+                if (rect.y + rect.height >= block.rect.y)
                 {
                     rect.y = block.rect.y - rect.height;
                     gravity = 0;
                     inAir = false;
                 }
-                else if (rect.x >= block.rect.x)
-                {
-                    rect.x += speed.X;
-                }
-                else if (rect.x <= block.rect.x)
-                {
-                    rect.x -= speed.X;
-                }
+
+                /*   else if (rect.y >= block.rect.y + block.rect.height)
+                  {
+                      rect.y += speed.Y;
+                  }  */
             }
         }
     }

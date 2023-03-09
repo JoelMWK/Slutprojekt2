@@ -12,13 +12,13 @@ Player player = new Player();
 Enemy enemy = new Enemy();
 Map map = new Map();
 map.LoadMap("./stages/stage1.json");
-Rectangle sky = new Rectangle(0, 0, 900, 540);
 
 
 while (!Raylib.WindowShouldClose())
 {
     //Logik
     player.Update();
+    //player.UpdateGun();
     enemy.Update();
     player.MapCollision();
     enemy.MapCollision();

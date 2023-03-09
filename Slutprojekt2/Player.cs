@@ -1,21 +1,21 @@
 public class Player : Character
 {
-    //Rectangle gRect = new Rectangle(0, 0, 48, 11);
-    //Vector2 pos;
-    //float angle;
+    /*  Rectangle gRect = new Rectangle(0, 0, 48, 11);
+     Vector2 pos;
+     float angle; */
 
     public Player()
     {
         p = this;
-        rect = new Rectangle(0, 0, 46, 80);
+        rect = new Rectangle(0, 0, 80, 80);
         a.currentTexture = Animations.spriteSheetP;
     }
     public override void Draw()
     {
         Raylib.DrawRectangleLines((int)rect.x, (int)rect.y, (int)rect.width, (int)rect.height, Color.YELLOW);
         base.Draw();
-        //Raylib.DrawTextureEx(gun, new Vector2(gRect.x, gRect.y), angle, 1, Color.WHITE);
-        //Raylib.DrawLine((int)rect.x + 30, (int)rect.y + 45, (int)pos.X, (int)pos.Y, Color.BLACK);
+        /*  Raylib.DrawTextureEx(Raylib.LoadTexture("./images/character/bow.png"), new Vector2(gRect.x, gRect.y), angle - 45, 1.5f, Color.WHITE);
+         Raylib.DrawLine((int)rect.x + 30, (int)rect.y + 45, (int)pos.X, (int)pos.Y, Color.BLACK); */
     }
     public override void Update()
     {
@@ -28,12 +28,12 @@ public class Player : Character
         Movement();
     }
 
-    /*public void UpdateGun()
-    {
-        pos = Raylib.GetMousePosition();
-        gRect = new Rectangle(rect.x + 30, rect.y + 45, 48, 11);
-        angle = MathF.Atan2(pos.Y - gRect.y, pos.X - gRect.x) * 180 / MathF.PI;
-    }*/
+    /*  public void UpdateGun()
+     {
+         pos = Raylib.GetMousePosition();
+         gRect = new Rectangle(rect.x + 30, rect.y + 45, 48, 11);
+         angle = MathF.Atan2(pos.Y - gRect.y, pos.X - gRect.x) * 180 / MathF.PI;
+     } */
 
     public void Movement()
     {

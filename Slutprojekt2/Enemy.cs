@@ -2,7 +2,8 @@ public class Enemy : Character
 {
     public Enemy()
     {
-        rect = new Rectangle(0, 0, 70, 35);
+        e = this;
+        rect = new Rectangle(0, 0, 70, 70);
         a.currentTexture = Animations.spriteSheetE;
     }
     public override void Update()
@@ -13,9 +14,9 @@ public class Enemy : Character
         else if (!isAlive) a.Name = "deathE";
         else a.Name = "idle";
 
-        if (Raylib.IsKeyDown(KeyboardKey.KEY_LEFT)) { rect.x -= speed.X; a.direction.X = 1; a.moving = true; }
+        /* if (Raylib.IsKeyDown(KeyboardKey.KEY_LEFT)) { rect.x -= speed.X; a.direction.X = 1; a.moving = true; }
         if (Raylib.IsKeyDown(KeyboardKey.KEY_RIGHT)) { rect.x += speed.X; a.direction.X = -1; a.moving = true; }
-        if (Raylib.IsKeyReleased(KeyboardKey.KEY_RIGHT) || Raylib.IsKeyReleased(KeyboardKey.KEY_LEFT)) a.moving = false;
+        if (Raylib.IsKeyReleased(KeyboardKey.KEY_RIGHT) || Raylib.IsKeyReleased(KeyboardKey.KEY_LEFT)) a.moving = false; */
     }
     public override void Draw()
     {
