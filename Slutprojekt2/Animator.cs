@@ -1,4 +1,4 @@
-public class Animator : AnimationHandler
+public class Animator : Animations
 {
 
     public Texture2D currentTexture;

@@ -1,10 +1,10 @@
-public class AnimationHandler
+public class Animations
 {
     public static Texture2D spriteSheetP = Raylib.LoadTexture("./images/character/Player.png");
     public static Texture2D spriteSheetE = Raylib.LoadTexture("./images/character/Enemy.png");
     protected Dictionary<string, Vector2> colRow = new Dictionary<string, Vector2>();
 
-    public AnimationHandler()
+    public Animations()
     {
         colRow.Add("idle", new Vector2(3, 0));
         colRow.Add("walk", new Vector2(3, 1));

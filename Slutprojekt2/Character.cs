@@ -1,7 +1,6 @@
 public class Character
 {
     protected Animator a = new Animator();
-
     public Rectangle rect;
     protected int ground = 500;
     public bool inAir = false;
@@ -52,9 +51,14 @@ public class Character
                     gravity = 0;
                     inAir = false;
                 }
-
-                else if (rect.x >= block.rect.x) rect.x += speed.X;
-                else if (rect.x <= block.rect.x) rect.x -= speed.X;
+                else if (rect.x >= block.rect.x)
+                {
+                    rect.x += speed.X;
+                }
+                else if (rect.x <= block.rect.x)
+                {
+                    rect.x -= speed.X;
+                }
             }
         }
     }

@@ -12,6 +12,7 @@ Player player = new Player();
 Enemy enemy = new Enemy();
 Map map = new Map();
 map.LoadMap("./stages/stage1.json");
+Rectangle sky = new Rectangle(0, 0, 900, 540);
 
 
 while (!Raylib.WindowShouldClose())
@@ -26,7 +27,6 @@ while (!Raylib.WindowShouldClose())
     Raylib.BeginDrawing();
     Raylib.ClearBackground(Color.SKYBLUE);
 
-    Raylib.DrawRectangle(0, 500, 900, 50, Color.GRAY);
     map.DrawMap();
     player.Draw();
     enemy.Draw();

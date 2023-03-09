@@ -3,12 +3,12 @@ public class Enemy : Character
     public Enemy()
     {
         rect = new Rectangle(0, 0, 70, 35);
-        a.currentTexture = AnimationHandler.spriteSheetE;
+        a.currentTexture = Animations.spriteSheetE;
     }
     public override void Update()
     {
         base.Update();
-        Console.WriteLine("e: " + a.Name);
+
         if (a.moving) a.Name = "walk";
         else if (!isAlive) a.Name = "deathE";
         else a.Name = "idle";
@@ -19,7 +19,7 @@ public class Enemy : Character
     }
     public override void Draw()
     {
-        Raylib.DrawRectangle((int)rect.x, (int)rect.y, (int)rect.width, (int)rect.height, Color.RED);
+        Raylib.DrawRectangleLines((int)rect.x, (int)rect.y, (int)rect.width, (int)rect.height, Color.YELLOW);
         base.Draw();
     }
 }

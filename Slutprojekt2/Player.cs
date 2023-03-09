@@ -8,11 +8,11 @@ public class Player : Character
     {
         p = this;
         rect = new Rectangle(0, 0, 46, 80);
-        a.currentTexture = AnimationHandler.spriteSheetP;
+        a.currentTexture = Animations.spriteSheetP;
     }
     public override void Draw()
     {
-        Raylib.DrawRectangle((int)rect.x, (int)rect.y, (int)rect.width, (int)rect.height, Color.GREEN);
+        Raylib.DrawRectangleLines((int)rect.x, (int)rect.y, (int)rect.width, (int)rect.height, Color.YELLOW);
         base.Draw();
         //Raylib.DrawTextureEx(gun, new Vector2(gRect.x, gRect.y), angle, 1, Color.WHITE);
         //Raylib.DrawLine((int)rect.x + 30, (int)rect.y + 45, (int)pos.X, (int)pos.Y, Color.BLACK);
@@ -20,7 +20,6 @@ public class Player : Character
     public override void Update()
     {
         base.Update();
-        Console.WriteLine("p: " + a.Name);
         if (a.moving && !inAir) a.Name = "run";
         else if (inAir) a.Name = "jump";
         else if (!isAlive) a.Name = "death";
