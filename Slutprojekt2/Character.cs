@@ -52,7 +52,6 @@ public class Character
         {
             if (block.CheckCollisionRecs(rect))
             {
-
                 if (rect.y + rect.height >= block.rect.y)
                 {
                     rect.y = block.rect.y - rect.height;
