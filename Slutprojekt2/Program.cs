@@ -18,7 +18,6 @@ while (!Raylib.WindowShouldClose())
 {
     //Logik
     player.Update();
-    //player.UpdateGun();
     enemy.Update();
     player.MapCollision();
     enemy.MapCollision();

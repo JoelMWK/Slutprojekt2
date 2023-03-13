@@ -25,13 +25,6 @@ public class Player : Character
         Movement();
     }
 
-    /*  public void UpdateGun()
-     {
-         pos = Raylib.GetMousePosition();
-         gRect = new Rectangle(rect.x + 30, rect.y + 45, 48, 11);
-         angle = MathF.Atan2(pos.Y - gRect.y, pos.X - gRect.x) * 180 / MathF.PI;
-     } */
-
     public void Movement()
     {
         if (Raylib.IsKeyDown(KeyboardKey.KEY_SPACE) && !inAir)

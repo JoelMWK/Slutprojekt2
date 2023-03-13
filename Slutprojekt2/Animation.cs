@@ -13,7 +13,7 @@ public class Animation
         ani.Add("jump", new Vector3(7, 4, 0.14f));
         ani.Add("death2", new Vector3(2, 5, 0.2f));
         ani.Add("death", new Vector3(7, 6, 0.2f));
-        ani.Add("attack", new Vector3(7, 7, 0.2f));
+        ani.Add("attack", new Vector3(7, 7, 0.1f));
         ani.Add("attackE", new Vector3(3, 3, 0.2f));
         ani.Add("deathE", new Vector3(3, 2, 0.2f));
     }

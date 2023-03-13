@@ -1,7 +1,7 @@
 public class Block
 {
     public static List<Block> blockList = new List<Block>();
-    private static Texture2D[] textures = {
+    protected static Texture2D[] textures = {
         Raylib.LoadTexture("./images/tile/grass.png"),
         Raylib.LoadTexture("./images/tile/dirt.png"),
         Raylib.LoadTexture("./images/tile/platform.png"),
@@ -13,7 +13,7 @@ public class Block
     private Texture2D blockTexture;
     public Rectangle rect;
     private double rot = 20;
-    private float blockSize = 60;
+    protected float blockSize = 60;
 
     public Block(int x, int y, int type) //Konstruktor för alla blocks som har specifika värden inmatade
     {
