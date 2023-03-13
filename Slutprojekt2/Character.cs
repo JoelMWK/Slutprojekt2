@@ -15,8 +15,6 @@ public class Character
         SetGravity();
         CheckGround();
         a.Anim();
-        a.aniVector.X = rect.x;
-        a.aniVector.Y = rect.y;
     }
 
     public virtual void Draw()

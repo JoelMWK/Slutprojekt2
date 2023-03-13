@@ -1,6 +1,7 @@
 public class Sword : Weapon
 {
     public Rectangle hitbox = new Rectangle(0, 0, 50, 20);
+
     public Sword()
     {
         sprite = Raylib.LoadTexture("./images/character/sword.png");
@@ -8,10 +9,9 @@ public class Sword : Weapon
         scale = 2;
     }
 
-    public void Update()
+    public void Update(Character p)
     {
-        hitbox.x = Character.p.rect.x;
-        hitbox.y = Character.p.rect.y;
+        hitbox = new Rectangle(p.rect.x, p.rect.y, 80, 80);
     }
 
     public void Draw()
