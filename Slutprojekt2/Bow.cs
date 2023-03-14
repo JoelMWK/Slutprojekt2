@@ -1,23 +1,19 @@
 public class Bow : Weapon
 {
     private List<Projectile> projectiles = new List<Projectile>();
-    private Vector2 position;
-    private Vector2 speed = new Vector2(8, 8);
+    private int speed = 10;
     private int arrowCount = 1;
-    private float angle;
+    private Rectangle source = new Rectangle(0, 0, 14, 50);
+    private Vector2 pos;
 
     public Bow()
     {
-        sprite = Raylib.LoadTexture("./images/character/bow.png");
+        sprite = Raylib.LoadTexture("./images/character/Items/bow.png");
         Damage = 1;
         IsActive = false;
     }
     public void Update(Player p)
     {
-        position = Raylib.GetMousePosition();
-        angle = MathF.Atan2(position.Y - p.rect.y, position.X - p.rect.x) * 180 / MathF.PI;
-
-
         if (Raylib.IsMouseButtonPressed(0))
         {
             Shoot(p);
@@ -32,7 +28,7 @@ public class Bow : Weapon
 
     public void Shoot(Player p)
     {
-        Projectile projectile = new(position, p);
+        Projectile projectile = new(p);
 
         if (projectiles.Count() < arrowCount)
         {
@@ -41,8 +37,10 @@ public class Bow : Weapon
         }
     }
 
-    public void Draw()
+    public void Draw(Player p)
     {
-        Raylib.DrawTextureEx(sprite, new Vector2(Character.p.rect.x + 40, Character.p.rect.y + 40), angle - 45, 1.5f, Color.WHITE);
+        if (p.a.direction == -1) pos = new Vector2(p.rect.x - 15, p.rect.y + 14);
+        else pos = new Vector2(p.rect.x + 45, p.rect.y + 14);
+        Raylib.DrawTextureRec(sprite, new Rectangle(source.x, source.y, source.width * p.a.direction, source.height), pos, Color.WHITE);
     }
 }

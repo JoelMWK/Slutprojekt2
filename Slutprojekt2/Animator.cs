@@ -8,14 +8,13 @@ public class Animator
     float timer;
 
     public Rectangle source = new Rectangle(0, 0, 80, 80);
-    public Vector2 direction = new Vector2(1, 0);
+    public int direction = 1;
     public bool moving = false;
 
 
     public void Anim()
     {
-        totalFrames = (int)animations.ani[Name].X * (int)source.width / 80;
-
+        totalFrames = (int)animations.ani[Name].X;
 
         timer += Raylib.GetFrameTime();
         if (timer >= animations.ani[Name].Z)
@@ -32,6 +31,6 @@ public class Animator
     }
     public void Draw(Character c)
     {
-        Raylib.DrawTexturePro(currentTexture, new Rectangle(source.x, source.y, source.width * direction.X, source.height), c.rect, Vector2.Zero, 0, Color.WHITE);
+        Raylib.DrawTexturePro(currentTexture, new Rectangle(source.x, source.y, source.width * direction, source.height), c.rect, Vector2.Zero, 0, Color.WHITE);
     }
 }

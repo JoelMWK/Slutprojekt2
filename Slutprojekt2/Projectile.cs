@@ -1,31 +1,28 @@
 public class Projectile
 {
     public bool isActive { get; set; }
-    private static Texture2D arrow = Raylib.LoadTexture("./images/character/arrow.png");
-    private Vector2 pos;
+    private static Texture2D arrow = Raylib.LoadTexture("./images/character/Items/arrow.png");
     private Vector2 origin;
     private Rectangle rect = new Rectangle(0, 0, arrow.width, arrow.height);
-    public Vector2 velocity;
-    private float angle;
+    private Rectangle source = new Rectangle(0, 0, arrow.width, arrow.height);
     private float gravity;
+    private int dir;
 
-    public Projectile(Vector2 position, Player p)
+    public Projectile(Player p)
     {
         isActive = false;
-        pos = position;
-        origin = new Vector2(p.rect.x + 40, p.rect.y + 30);
-        angle = MathF.Atan2(pos.Y - origin.Y, pos.X - origin.X);
+        origin = new Vector2(p.rect.x + 40*dir, p.rect.y + 30);
+        dir = p.a.direction;
+        source.width *= dir;
     }
 
-    public void Update(Vector2 speed)
+    public void Update(int velocity)
     {
-        origin += velocity;
+        origin.X += velocity * dir;
 
         rect.x = origin.X;
         rect.y = origin.Y;
 
-        velocity.X = speed.X * MathF.Cos(angle);
-        velocity.Y = speed.Y * MathF.Sin(angle);
         ProjectileDrop();
         Collision();
         Draw();
@@ -39,8 +36,7 @@ public class Projectile
 
     private void Draw()
     {
-        Raylib.DrawRectangleRec(rect, Color.WHITE);
-        Raylib.DrawTextureEx(arrow, new Vector2(rect.x, rect.y), angle * 180 / MathF.PI, 1, Color.WHITE);
+        Raylib.DrawTextureRec(arrow, source, new Vector2(rect.x, rect.y), Color.WHITE);
     }
 
     private void Collision()
@@ -52,7 +48,7 @@ public class Projectile
                 isActive = false;
             }
         }
-        if (rect.x >= Raylib.GetScreenWidth() || rect.x < 0 || rect.y >= Raylib.GetScreenWidth() || rect.y < 0)
+        if (rect.x >= Raylib.GetScreenWidth() || rect.x < 0 || rect.y >= Raylib.GetScreenWidth())
         {
             isActive = false;
         }

@@ -1,6 +1,6 @@
 public class Weapon
 {
-    protected static Texture2D sprite;
+    protected Texture2D sprite;
     protected float rot;
     protected float scale = 1;
     public bool IsActive { get; set; }

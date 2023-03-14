@@ -1,6 +1,6 @@
 public class Character
 {
-    protected Animator a = new Animator();
+    public Animator a = new Animator();
     public Rectangle rect;
     protected int ground = 500;
     public bool inAir = false;
