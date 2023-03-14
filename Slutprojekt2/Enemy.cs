@@ -10,9 +10,9 @@ public class Enemy : Character
     {
         base.Update();
 
-        if (a.moving) a.Name = "walk";
-        else if (!isAlive) a.Name = "deathE";
-        else a.Name = "idle";
+        if (a.moving) a.Name = "E_Walk";
+        else if (!isAlive) a.Name = "E_Death";
+        else a.Name = "E_Idle";
 
         if (Raylib.IsKeyDown(KeyboardKey.KEY_LEFT)) { rect.x -= speed.X; a.direction = 1; a.moving = true; }
         if (Raylib.IsKeyDown(KeyboardKey.KEY_RIGHT)) { rect.x += speed.X; a.direction = -1; a.moving = true; }

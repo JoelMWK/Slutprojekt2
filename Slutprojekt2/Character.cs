@@ -14,7 +14,7 @@ public class Character
     {
         SetGravity();
         CheckGround();
-        a.Anim();
+        a.Anim((int)a.animations.ani[a.Name].X, (int)a.animations.ani[a.Name].Y, a.animations.ani[a.Name].Z);
     }
 
     public virtual void Draw()

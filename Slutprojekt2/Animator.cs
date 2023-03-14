@@ -1,30 +1,28 @@
 public class Animator
 {
-    protected Animation animations = new Animation();
+    public Animation animations = new Animation();
     public Texture2D currentTexture;
-    Vector2 currentFrame;
-    int totalFrames;
-    public string Name { get; set; } = "idle";
-    float timer;
-
+    private Vector2 currentFrame;
+    private int totalFrames;
     public Rectangle source = new Rectangle(0, 0, 80, 80);
+    public string Name { get; set; } = "E_Idle";
+    public float timer;
     public int direction = 1;
     public bool moving = false;
 
-
-    public void Anim()
+    public void Anim(int row, int column, float frameSpeed)
     {
-        totalFrames = (int)animations.ani[Name].X;
+        totalFrames = row;
 
         timer += Raylib.GetFrameTime();
-        if (timer >= animations.ani[Name].Z)
+        if (timer >= frameSpeed)
         {
             timer = 0.0f;
             currentFrame.X++;
         }
 
         if (currentFrame.X > totalFrames) currentFrame.X = 0;
-        for (int i = 0; i < animations.ani.Count; i++) currentFrame.Y = animations.ani[Name].Y;
+        for (int i = 0; i < animations.ani.Count; i++) currentFrame.Y = column;
 
         source.x = currentFrame.X * source.width;
         source.y = currentFrame.Y * source.height;

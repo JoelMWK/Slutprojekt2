@@ -11,7 +11,7 @@ public class Projectile
     public Projectile(Player p)
     {
         isActive = false;
-        origin = new Vector2(p.rect.x + 40*dir, p.rect.y + 30);
+        origin = new Vector2(p.rect.x + 40 * dir, p.rect.y + 30);
         dir = p.a.direction;
         source.width *= dir;
     }
@@ -31,7 +31,7 @@ public class Projectile
     private void ProjectileDrop()
     {
         origin.Y += gravity;
-        gravity += 0.08f;
+        gravity += 0.04f;
     }
 
     private void Draw()

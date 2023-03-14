@@ -8,9 +8,6 @@ Raylib.InitWindow(900, 540, "Platformer");
 Raylib.SetTargetFPS(60);
 
 
-//Player player = new Player();
-//Archer archer = new Archer();
-//Spearman spearman = new Spearman();
 ClassSelector classSelector = new ClassSelector();
 Enemy enemy = new Enemy();
 Map map = new Map();
@@ -29,14 +26,8 @@ while (!Raylib.WindowShouldClose())
     else
     {
         //Logik
-        //player.Update();
-        //archer.Update();
-        // spearman.Update();
-        classSelector.Update();
         enemy.Update();
-        //archer.MapCollision();
-        //spearman.MapCollision(); 
-        //player.MapCollision();
+        classSelector.Update();
         enemy.MapCollision();
 
         //Grafik
@@ -44,11 +35,8 @@ while (!Raylib.WindowShouldClose())
         Raylib.ClearBackground(Color.SKYBLUE);
 
         map.DrawMap();
-        classSelector.Draw();
-        //archer.Draw();
-        //spearman.Draw();
-        //player.Draw();
         enemy.Draw();
+        classSelector.Draw();
 
         Raylib.EndDrawing();
     }

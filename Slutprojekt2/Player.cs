@@ -1,6 +1,5 @@
 public class Player : Character
 {
-    //Bow bow = new Bow();
     public Player()
     {
         p = this;
@@ -10,12 +9,10 @@ public class Player : Character
     public override void Draw()
     {
         Raylib.DrawRectangleLines((int)rect.x, (int)rect.y, (int)rect.width, (int)rect.height, Color.YELLOW);
-        //bow.Draw();
         base.Draw();
     }
     public override void Update()
     {
-        //bow.Update(this);
         base.Update();
         Movement();
     }
