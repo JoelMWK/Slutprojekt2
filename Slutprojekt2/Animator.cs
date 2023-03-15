@@ -2,10 +2,10 @@ public class Animator
 {
     public Animation animations = new Animation();
     public Texture2D currentTexture;
-    private Vector2 currentFrame;
+    public Vector2 currentFrame;
     private int totalFrames;
-    public Rectangle source = new Rectangle(0, 0, 80, 80);
-    public string Name { get; set; } = "E_Idle";
+    public Rectangle source = new Rectangle(0, 0, 64, 83);
+    public string Name { get; set; } = "A_Idle";
     public float timer;
     public int direction = 1;
     public bool moving = false;

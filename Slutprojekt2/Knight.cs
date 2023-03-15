@@ -11,8 +11,8 @@ public class Knight : Player
     {
         sword.Update(this);
         base.Update();
-        if (a.moving && !inAir) a.Name = "K_Run";
-        else if (inAir) a.Name = "K_Jump";
+        if (a.moving && !InAir) a.Name = "K_Run";
+        else if (InAir) a.Name = "K_Jump";
         else a.Name = "K_Idle";
     }
 

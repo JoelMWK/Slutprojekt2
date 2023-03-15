@@ -19,12 +19,12 @@ public class Player : Character
 
     public void Movement()
     {
-        if (Raylib.IsKeyDown(KeyboardKey.KEY_SPACE) && !inAir)
+        if (Raylib.IsKeyDown(KeyboardKey.KEY_SPACE) && !InAir)
         {
-            inAir = true;
+            InAir = true;
         }
 
-        if (inAir == true)
+        if (InAir == true)
         {
             rect.y -= speed.Y;
         }

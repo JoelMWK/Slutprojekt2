@@ -11,8 +11,8 @@ public class Archer : Player
     {
         bow.Update(this);
         base.Update();
-        if (a.moving && !inAir) a.Name = "A_Run";
-        else if (inAir) a.Name = "A_Jump";
+        if (a.moving && !InAir) a.Name = "A_Run";
+        else if (InAir) a.Name = "A_Jump";
         else a.Name = "A_Idle";
     }
     public override void Draw()

@@ -31,7 +31,7 @@ public class Projectile
     private void ProjectileDrop()
     {
         origin.Y += gravity;
-        gravity += 0.04f;
+        gravity += 0.05f;
     }
 
     private void Draw()

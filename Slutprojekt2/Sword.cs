@@ -1,6 +1,6 @@
 public class Sword : Weapon
 {
-    Animator a = new Animator();
+    private Animator a = new Animator();
     private Rectangle dest = new Rectangle(0, 0, 65, 108);
     private float time;
     private bool isAttacking;
@@ -54,7 +54,6 @@ public class Sword : Weapon
         {
             dest = new Rectangle(p.rect.x + 45, p.rect.y, dest.width, dest.height);
         }
-        Raylib.DrawRectangleRec(SwordHitbox(dest), Color.YELLOW);
         Raylib.DrawTexturePro(sprite, new Rectangle(a.source.x, a.source.y, a.source.width * p.a.direction, a.source.height), dest, Vector2.Zero, 0, Color.WHITE);
     }
 }

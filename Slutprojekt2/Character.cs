@@ -1,10 +1,11 @@
 public class Character
 {
     public Animator a = new Animator();
+    public int Hp { get; set; }
+    public bool InAir { get; set; } = false;
+    public bool IsAlive { get; set; } = true;
     public Rectangle rect;
     protected int ground = 500;
-    public bool inAir = false;
-    public bool isAlive = true;
     protected float gravity = 0;
     protected Vector2 speed = new Vector2(4, 8);
     public static Player p;
@@ -33,19 +34,12 @@ public class Character
         {
             rect.y = ground - rect.height;
             gravity = 0;
-            inAir = false;
+            InAir = false;
         }
     }
 
     public void MapCollision()
     {
-        Raylib.DrawText("pX: " + Character.p.rect.x, 10, 0, 20, Color.BLACK);
-        Raylib.DrawText("pY: " + Character.p.rect.y, 10, 20, 20, Color.BLACK);
-        Raylib.DrawText("Player Animation: " + Character.p.a.Name, 200, 20, 20, Color.BLACK);
-        Raylib.DrawText("Enemy Animation: " + Character.e.a.Name, 200, 40, 20, Color.BLACK);
-        Raylib.DrawText("eX: " + Character.e.rect.x, 10, 60, 20, Color.BLACK);
-        Raylib.DrawText("eY: " + Character.e.rect.y, 10, 80, 20, Color.BLACK);
-
         foreach (Block block in Block.blockList)
         {
             if (block.CheckCollisionRecs(rect))
@@ -54,13 +48,16 @@ public class Character
                 {
                     rect.y = block.rect.y - rect.height;
                     gravity = 0;
-                    inAir = false;
+                    InAir = false;
                 }
-
-                /*   else if (rect.y >= block.rect.y + block.rect.height)
-                  {
-                      rect.y += speed.Y;
-                  }  */
+                /*    else if (rect.x + rect.width <= block.rect.x)
+                   {
+                       rect.x -= speed.X;
+                   }
+                   else if (rect.x >= block.rect.x + block.rect.width)
+                   {
+                       rect.x += speed.X;
+                   } */
             }
         }
     }
