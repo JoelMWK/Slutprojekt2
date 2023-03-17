@@ -7,10 +7,10 @@ public class ClassSelector
     };
 
     public bool selected;
-    public bool a, b;
+    private string className;
 
-    Rectangle ButtonA = new Rectangle(180, 300, 200, 150);
-    Rectangle ButtonB = new Rectangle(580, 300, 200, 150);
+    private Rectangle ButtonA = new Rectangle(180, 300, 200, 150);
+    private Rectangle ButtonB = new Rectangle(580, 300, 200, 150);
 
     public void ChoosePlayer()
     {
@@ -27,34 +27,23 @@ public class ClassSelector
             if (Raylib.CheckCollisionPointRec(Raylib.GetMousePosition(), ButtonA))
             {
                 selected = true;
-                a = true;
+                className = "Archer";
             }
             else if (Raylib.CheckCollisionPointRec(Raylib.GetMousePosition(), ButtonB))
             {
                 selected = true;
-                b = true;
+                className = "Knight";
             }
         }
     }
     public void Update()
     {
-        if (a)
-        {
-            playerClass["Archer"].Update();
-            playerClass["Archer"].MapCollision();
-        }
-        else
-        {
-            playerClass["Knight"].Update();
-            playerClass["Knight"].MapCollision();
-        }
+        playerClass[className].Update();
+        playerClass[className].MapCollision();
     }
 
     public void Draw()
     {
-        if (a)
-            playerClass["Archer"].Draw();
-        else
-            playerClass["Knight"].Draw();
+        playerClass[className].Draw();
     }
 }

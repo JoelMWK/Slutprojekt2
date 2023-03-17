@@ -3,7 +3,7 @@ public class Player : Character
     public Player()
     {
         p = this;
-        rect = new Rectangle(0, 0, 45, 81);
+        rect = new Rectangle(200, 0, 45, 81);
         a.currentTexture = Animation.spriteSheetP;
     }
     public override void Draw()

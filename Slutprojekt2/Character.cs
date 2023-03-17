@@ -1,9 +1,15 @@
 public class Character
 {
     public Animator a = new Animator();
-    public int Hp { get; set; }
+    public int Hp { get; set; } = 10;
     public bool InAir { get; set; } = false;
-    public bool IsAlive { get; set; } = true;
+    public bool IsAlive
+    {
+        get
+        {
+            return Hp > 0;
+        }
+    }
     public Rectangle rect;
     protected int ground = 500;
     protected float gravity = 0;
@@ -60,5 +66,18 @@ public class Character
                    } */
             }
         }
+    }
+
+    public bool IsVisible(int distance)
+    {
+        return Vector2.Distance(new Vector2(p.rect.x, p.rect.y), new Vector2(e.rect.x, e.rect.y)) <= distance;
+    }
+    public bool LeftSide()
+    {
+        return e.rect.x >= p.rect.x;
+    }
+    public bool RightSide()
+    {
+        return e.rect.x <= p.rect.x;
     }
 }

@@ -16,6 +16,16 @@ public class Sword : Weapon
     {
         time += Raylib.GetFrameTime();
         Hit();
+        Collsion();
+    }
+
+    private void Collsion()
+    {
+        if (CheckCollisionRecs(Character.e.rect))
+        {
+            Character.e.Hp--;
+            Console.WriteLine(Character.e.Hp);
+        }
     }
 
     private void Hit()
@@ -55,5 +65,10 @@ public class Sword : Weapon
             dest = new Rectangle(p.rect.x + 45, p.rect.y, dest.width, dest.height);
         }
         Raylib.DrawTexturePro(sprite, new Rectangle(a.source.x, a.source.y, a.source.width * p.a.direction, a.source.height), dest, Vector2.Zero, 0, Color.WHITE);
+    }
+
+    private bool CheckCollisionRecs(Rectangle other)
+    {
+        return Raylib.CheckCollisionRecs(SwordHitbox(new Rectangle()), other);
     }
 }
