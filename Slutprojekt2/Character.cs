@@ -1,7 +1,7 @@
 public class Character
 {
     public Animator a = new Animator();
-    public int Hp { get; set; } = 10;
+    public int Hp { get; set; }
     public bool InAir { get; set; } = false;
     public bool IsAlive
     {
@@ -12,16 +12,17 @@ public class Character
     }
     public Rectangle rect;
     protected int ground = 500;
-    protected float gravity = 0;
+    protected float gravity;
     protected Vector2 speed = new Vector2(4, 8);
     public static Player p;
     public static Enemy e;
+    public int MarginY { get; set; }
 
     public virtual void Update()
     {
         SetGravity();
         CheckGround();
-        a.Anim((int)a.animations.ani[a.Name].X, (int)a.animations.ani[a.Name].Y, a.animations.ani[a.Name].Z);
+        a.Anim((int)a.animations.ani[a.Name].X, (int)a.animations.ani[a.Name].Y, a.animations.ani[a.Name].Z, MarginY);
     }
 
     public virtual void Draw()
@@ -50,20 +51,29 @@ public class Character
         {
             if (block.CheckCollisionRecs(rect))
             {
-                if (rect.y + rect.height >= block.rect.y)
+                float left = rect.x + rect.width - block.rect.x; //vänster sida av blocket - höger sida av character
+                float right = block.rect.x + block.rect.width - rect.x; //höger sida av blocket - vänster sida av character
+                float top = rect.y + rect.height - block.rect.y; //toppen av blocket - botten av character
+                float bottom = block.rect.y + block.rect.height - rect.y; //botten av blocket - toppen av character      
+
+                if (top < bottom && top < left && top < right) //Kollar om spelaren kolliderar på toppen av blocket
                 {
                     rect.y = block.rect.y - rect.height;
                     gravity = 0;
                     InAir = false;
                 }
-                /*    else if (rect.x + rect.width <= block.rect.x)
-                   {
-                       rect.x -= speed.X;
-                   }
-                   else if (rect.x >= block.rect.x + block.rect.width)
-                   {
-                       rect.x += speed.X;
-                   } */
+                else if (bottom < top && bottom < left && bottom < right) //Kollar om spelaren kolliderar på undersidan av blocket
+                {
+                    rect.y = block.rect.y + block.rect.height;
+                }
+                else if (left < right) //Kollar om spelare kolliderar på vänster om blocket
+                {
+                    rect.x -= speed.X;
+                }
+                else //Kollar om spelare kolliderar på höger om blocket
+                {
+                    rect.x += speed.X;
+                }
             }
         }
     }

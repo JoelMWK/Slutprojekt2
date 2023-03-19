@@ -1,9 +1,10 @@
 public class Player : Character
 {
+    public Camera camera = new Camera();
     public Player()
     {
-        p = this;
-        rect = new Rectangle(200, 0, 45, 81);
+        rect = new Rectangle(400, 0, 45, 81);
+        Hp = 10;
         a.currentTexture = Animation.spriteSheetP;
     }
     public override void Draw()
@@ -15,6 +16,7 @@ public class Player : Character
     {
         base.Update();
         Movement();
+        camera.WorldToScreen(new Vector2(rect.x, rect.y));
     }
 
     public void Movement()

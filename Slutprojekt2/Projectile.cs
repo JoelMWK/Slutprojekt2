@@ -1,6 +1,6 @@
 public class Projectile
 {
-    public bool isActive { get; set; }
+    public bool IsActive { get; set; }
     private static Texture2D arrow = Raylib.LoadTexture("./images/character/Items/arrow.png");
     private Vector2 origin;
     private Rectangle rect = new Rectangle(0, 0, arrow.width, arrow.height);
@@ -10,8 +10,8 @@ public class Projectile
 
     public Projectile(Player p)
     {
-        isActive = false;
-        origin = new Vector2(p.rect.x + 40 * dir, p.rect.y + 30);
+        IsActive = false;
+        origin = p.camera.WorldToScreen(new Vector2(p.rect.x + 40 * dir, p.rect.y + 30));
         dir = p.a.direction;
         source.width *= dir;
     }
@@ -23,7 +23,7 @@ public class Projectile
         rect.x = origin.X;
         rect.y = origin.Y;
 
-        ProjectileDrop();
+        //ProjectileDrop();
         Collision();
         Draw();
     }
@@ -36,21 +36,37 @@ public class Projectile
 
     private void Draw()
     {
-        Raylib.DrawTextureRec(arrow, source, new Vector2(rect.x, rect.y), Color.WHITE);
+        Raylib.DrawTextureRec(arrow, source, origin, Color.WHITE);
     }
 
     private void Collision()
     {
+        Timer.Update();
+        foreach (Enemy e in EnemySpawner.enemies)
+        {
+            if (CheckCollisionRecs(e.rect) && Timer.CheckTimer(0.5f))
+            {
+                e.Hp--;
+                IsActive = false;
+                Timer.ResetTimer();
+            }
+        }
         foreach (Block block in Block.blockList)
         {
             if (block.CheckCollisionRecs(rect))
             {
-                isActive = false;
+                IsActive = false;
             }
         }
-        if (rect.x >= Raylib.GetScreenWidth() || rect.x < 0 || rect.y >= Raylib.GetScreenWidth())
-        {
-            isActive = false;
-        }
+
+        /*  if (rect.x >= Raylib.GetScreenWidth() || rect.x < 0 || rect.y >= Raylib.GetScreenHeight())
+         {
+             IsActive = false;
+         } */
+    }
+
+    public bool CheckCollisionRecs(Rectangle other)
+    {
+        return Raylib.CheckCollisionRecs(rect, other);
     }
 }

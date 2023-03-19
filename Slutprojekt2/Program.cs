@@ -7,9 +7,9 @@ global using System.Text.Json;
 Raylib.InitWindow(900, 540, "Platformer");
 Raylib.SetTargetFPS(60);
 
-
+//Camera camera = new Camera();
 ClassSelector classSelector = new ClassSelector();
-Enemy enemy = new Enemy();
+EnemySpawner enemySpawner = new EnemySpawner();
 Map map = new Map();
 map.LoadMap("./stages/stage1.json");
 
@@ -19,25 +19,23 @@ while (!Raylib.WindowShouldClose())
     if (!classSelector.selected)
     {
         classSelector.ChoosePlayer();
-        Raylib.BeginDrawing();
-        Raylib.ClearBackground(Color.BLACK);
-        Raylib.EndDrawing();
     }
     else
     {
         //Logik
-        enemy.Update();
+        enemySpawner.Update();
         classSelector.Update();
-        enemy.MapCollision();
 
         //Grafik
         Raylib.BeginDrawing();
         Raylib.ClearBackground(Color.SKYBLUE);
+        Raylib.BeginMode2D(ClassSelector.players[classSelector.classIndex].camera.Camera2D);
 
         map.DrawMap();
-        enemy.Draw();
+        enemySpawner.Draw();
         classSelector.Draw();
 
+        Raylib.EndMode2D();
         Raylib.EndDrawing();
     }
 }

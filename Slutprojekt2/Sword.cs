@@ -1,19 +1,20 @@
 public class Sword : Weapon
 {
     private Animator a = new Animator();
-    private Rectangle dest = new Rectangle(0, 0, 65, 108);
+    private Rectangle dest = new Rectangle(0, 0, 58, 108);
     private float time;
     private bool isAttacking;
     public Sword()
     {
         sprite = Raylib.LoadTexture("./images/character/Items/swordSheet.png");
-        a.source.width = 65;
+        a.source.width = 58;
         a.source.height = 108;
         Damage = 3;
     }
 
     public void Update(Player p)
     {
+        Timer.Update();
         time += Raylib.GetFrameTime();
         Hit();
         Collsion();
@@ -21,10 +22,13 @@ public class Sword : Weapon
 
     private void Collsion()
     {
-        if (CheckCollisionRecs(Character.e.rect))
+        foreach (Enemy e in EnemySpawner.enemies)
         {
-            Character.e.Hp--;
-            Console.WriteLine(Character.e.Hp);
+            if (CheckCollisionRecs(e.rect) && Timer.CheckTimer(0.5f))
+            {
+                e.Hp--;
+                Timer.ResetTimer();
+            }
         }
     }
 
@@ -36,13 +40,13 @@ public class Sword : Weapon
             isAttacking = true;
         }
 
-        if (time >= 0.3f)
+        if (time >= 0.24f)
         {
             time = 0;
             isAttacking = false;
         }
 
-        if (isAttacking) a.Anim(2, 0, 0.1f);
+        if (isAttacking) a.Anim(2, 0, 0.08f, 0);
     }
     private Rectangle SwordHitbox(Rectangle hitbox)
     {

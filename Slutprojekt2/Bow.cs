@@ -23,7 +23,7 @@ public class Bow : Weapon
         {
             projectile.Update(speed);
         }
-        projectiles.RemoveAll(projectile => !projectile.isActive);
+        projectiles.RemoveAll(projectile => !projectile.IsActive);
     }
 
     public void Shoot(Player p)
@@ -33,7 +33,7 @@ public class Bow : Weapon
         if (projectiles.Count() < arrowCount)
         {
             projectiles.Add(projectile);
-            projectile.isActive = true;
+            projectile.IsActive = true;
         }
     }
 

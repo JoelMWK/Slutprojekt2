@@ -4,13 +4,13 @@ public class Animator
     public Texture2D currentTexture;
     public Vector2 currentFrame;
     private int totalFrames;
-    public Rectangle source = new Rectangle(0, 0, 64, 83);
+    public Rectangle source;
     public string Name { get; set; } = "A_Idle";
     public float timer;
     public int direction = 1;
     public bool moving = false;
 
-    public void Anim(int row, int column, float frameSpeed)
+    public void Anim(int row, int column, float frameSpeed, int marginY)
     {
         totalFrames = row;
 
@@ -25,7 +25,7 @@ public class Animator
         for (int i = 0; i < animations.ani.Count; i++) currentFrame.Y = column;
 
         source.x = currentFrame.X * source.width;
-        source.y = currentFrame.Y * source.height;
+        source.y = marginY + currentFrame.Y * source.height;
     }
     public void Draw(Character c)
     {

@@ -14,7 +14,10 @@ public class Animation
         ani.Add("A_Run", new Vector3(3, 4, 0.2f));
         ani.Add("A_Jump", new Vector3(3, 5, 0.2f));
 
-        ani.Add("E_Idle", new Vector3(3, 0, 0.4f));
-        ani.Add("E_Walk", new Vector3(3, 1, 0.2f));
+        ani.Add("D_Idle", new Vector3(3, 0, 0.4f));
+        ani.Add("D_Walk", new Vector3(3, 1, 0.4f));
+
+        ani.Add("W_Idle", new Vector3(3, 0, 0.4f));
+        ani.Add("W_Walk", new Vector3(3, 1, 0.2f));
     }
 }

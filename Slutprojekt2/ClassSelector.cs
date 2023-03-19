@@ -1,49 +1,56 @@
 public class ClassSelector
 {
-    public Dictionary<string, Player> playerClass = new()
+    public static List<Player> players = new List<Player>()
     {
-        {"Archer", new Archer()},
-        {"Knight", new Knight()},
+        new Archer(),
+        new Knight(),
     };
 
     public bool selected;
-    private string className;
+    public int classIndex;
+    private static Texture2D[] images = {
+        Raylib.LoadTexture("./images/character/archer.png"),
+        Raylib.LoadTexture("./images/character/knight.png"),
+    };
 
-    private Rectangle ButtonA = new Rectangle(180, 300, 200, 150);
-    private Rectangle ButtonB = new Rectangle(580, 300, 200, 150);
+    private Rectangle buttonA = new Rectangle(250, 250, 150, 225);
+    private Rectangle buttonB = new Rectangle(500, 250, 150, 225);
 
     public void ChoosePlayer()
     {
-        Raylib.DrawText("Choose a player", 280, 100, 40, Color.WHITE);
-
-        Raylib.DrawRectangleRec(ButtonA, Color.WHITE);
-        Raylib.DrawRectangleRec(ButtonB, Color.WHITE);
-        Raylib.DrawText("Archer", 220, 350, 30, Color.BLACK);
-        Raylib.DrawText("Knight", 610, 350, 30, Color.BLACK);
-
-
         if (Raylib.IsMouseButtonPressed(0))
         {
-            if (Raylib.CheckCollisionPointRec(Raylib.GetMousePosition(), ButtonA))
+            if (Raylib.CheckCollisionPointRec(Raylib.GetMousePosition(), buttonA))
             {
                 selected = true;
-                className = "Archer";
+                classIndex = 0;
             }
-            else if (Raylib.CheckCollisionPointRec(Raylib.GetMousePosition(), ButtonB))
+            else if (Raylib.CheckCollisionPointRec(Raylib.GetMousePosition(), buttonB))
             {
                 selected = true;
-                className = "Knight";
+                classIndex = 1;
             }
         }
+        Character.p = players[classIndex];
+
+        Raylib.BeginDrawing();
+        Raylib.ClearBackground(Color.BLACK);
+
+        Raylib.DrawText("Choose a class", 280, 100, 40, Color.WHITE);
+
+        Raylib.DrawTexture(images[0], (int)buttonA.x, (int)buttonA.y, Color.WHITE);
+        Raylib.DrawTexture(images[1], (int)buttonB.x, (int)buttonB.y, Color.WHITE);
+
+        Raylib.EndDrawing();
     }
     public void Update()
     {
-        playerClass[className].Update();
-        playerClass[className].MapCollision();
+        players[classIndex].Update();
+        players[classIndex].MapCollision();
     }
 
     public void Draw()
     {
-        playerClass[className].Draw();
+        players[classIndex].Draw();
     }
 }
