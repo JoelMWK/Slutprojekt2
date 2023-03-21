@@ -31,4 +31,11 @@ public class Camera
             return Raylib.GetScreenToWorld2D(new Vector2(Character.p.rect.x, Character.p.rect.y), Camera2D);
         }
     }
+    public Vector2 ScreenToWorldHud
+    {
+        get
+        {
+            return Raylib.GetScreenToWorld2D(new Vector2(10, 10), Camera2D);
+        }
+    }
 }

@@ -2,6 +2,14 @@ public class Player : Character
 {
     public Camera camera = new Camera();
     public int direction;
+    private Rectangle HealthBar
+    {
+        get
+        {
+            return HealthBar = new Rectangle((int)camera.ScreenToWorldHud.X + 5, (int)camera.ScreenToWorldHud.Y + 5, 20 * Hp, 20);
+        }
+        set { }
+    }
     public Player()
     {
         rect = new Rectangle(400, 0, 45, 81);
@@ -10,6 +18,7 @@ public class Player : Character
     }
     public override void Draw()
     {
+        Hud();
         Raylib.DrawRectangleLines((int)rect.x, (int)rect.y, (int)rect.width, (int)rect.height, Color.YELLOW);
         base.Draw();
     }
@@ -19,7 +28,13 @@ public class Player : Character
         Movement();
     }
 
-    public void Movement()
+    private void Hud()
+    {
+        Raylib.DrawRectangle((int)camera.ScreenToWorldHud.X, (int)camera.ScreenToWorldHud.Y, 210, 30, Color.BLACK);
+        Raylib.DrawRectangleRec(HealthBar, Color.RED);
+    }
+
+    private void Movement()
     {
         if (Raylib.IsKeyDown(KeyboardKey.KEY_A)) { rect.x -= speed.X; a.direction.X = -1; direction = 1; a.moving = true; }
         if (Raylib.IsKeyDown(KeyboardKey.KEY_D)) { rect.x += speed.X; a.direction.X = 1; direction = 2; a.moving = true; }
