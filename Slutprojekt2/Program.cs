@@ -4,7 +4,7 @@ global using System.Numerics;
 global using System.IO;
 global using System.Text.Json;
 
-Raylib.InitWindow(900, 540, "Platformer");
+Raylib.InitWindow(900, 540, "Topdown");
 Raylib.SetTargetFPS(60);
 
 //Camera camera = new Camera();

@@ -6,18 +6,18 @@ public class Animator
     private int totalFrames;
     public Rectangle source;
     public string Name { get; set; } = "A_Idle";
-    public float timer;
-    public int direction = 1;
+    public float Time {get; set;}
+    public Vector2 direction = new Vector2(1, 0);
     public bool moving = false;
 
     public void Anim(int row, int column, float frameSpeed, int marginY)
     {
         totalFrames = row;
 
-        timer += Raylib.GetFrameTime();
-        if (timer >= frameSpeed)
+        Time += Raylib.GetFrameTime();
+        if (Time >= frameSpeed)
         {
-            timer = 0.0f;
+            Time = 0.0f;
             currentFrame.X++;
         }
 
@@ -29,6 +29,6 @@ public class Animator
     }
     public void Draw(Character c)
     {
-        Raylib.DrawTexturePro(currentTexture, new Rectangle(source.x, source.y, source.width * direction, source.height), c.rect, Vector2.Zero, 0, Color.WHITE);
+        Raylib.DrawTexturePro(currentTexture, new Rectangle(source.x, source.y, source.width * direction.X, source.height), c.rect, Vector2.Zero, 0, Color.WHITE);
     }
 }

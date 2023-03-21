@@ -1,6 +1,6 @@
 public class Archer : Player
 {
-    Bow bow = new Bow();
+        Bow bow = new Bow();
     public Archer()
     {
         a.source.width = 45;
@@ -11,8 +11,7 @@ public class Archer : Player
     {
         bow.Update(this);
         base.Update();
-        if (a.moving && !InAir) a.Name = "A_Run";
-        else if (InAir) a.Name = "A_Jump";
+        if (a.moving) a.Name = "A_Run";
         else a.Name = "A_Idle";
     }
     public override void Draw()

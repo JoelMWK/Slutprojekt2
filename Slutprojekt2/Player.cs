@@ -1,6 +1,7 @@
 public class Player : Character
 {
     public Camera camera = new Camera();
+    public int direction;
     public Player()
     {
         rect = new Rectangle(400, 0, 45, 81);
@@ -16,23 +17,15 @@ public class Player : Character
     {
         base.Update();
         Movement();
-        camera.WorldToScreen(new Vector2(rect.x, rect.y));
     }
 
     public void Movement()
     {
-        if (Raylib.IsKeyDown(KeyboardKey.KEY_SPACE) && !InAir)
-        {
-            InAir = true;
-        }
+        if (Raylib.IsKeyDown(KeyboardKey.KEY_A)) { rect.x -= speed.X; a.direction.X = -1; direction = 1; a.moving = true; }
+        if (Raylib.IsKeyDown(KeyboardKey.KEY_D)) { rect.x += speed.X; a.direction.X = 1; direction = 2; a.moving = true; }
+        if (Raylib.IsKeyDown(KeyboardKey.KEY_W)) { rect.y -= speed.Y; direction = 3; a.moving = true; }
+        if (Raylib.IsKeyDown(KeyboardKey.KEY_S)) { rect.y += speed.Y; direction = 4; a.moving = true; }
 
-        if (InAir == true)
-        {
-            rect.y -= speed.Y;
-        }
-
-        if (Raylib.IsKeyDown(KeyboardKey.KEY_A)) { rect.x -= speed.X; a.direction = -1; a.moving = true; }
-        if (Raylib.IsKeyDown(KeyboardKey.KEY_D)) { rect.x += speed.X; a.direction = 1; a.moving = true; }
-        if (Raylib.IsKeyReleased(KeyboardKey.KEY_D) || Raylib.IsKeyReleased(KeyboardKey.KEY_A)) a.moving = false;
+        if (Raylib.IsKeyReleased(KeyboardKey.KEY_D) || Raylib.IsKeyReleased(KeyboardKey.KEY_A) || Raylib.IsKeyReleased(KeyboardKey.KEY_W) || Raylib.IsKeyReleased(KeyboardKey.KEY_S)) a.moving = false;
     }
 }

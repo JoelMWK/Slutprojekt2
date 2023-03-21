@@ -2,7 +2,6 @@ public class Character
 {
     public Animator a = new Animator();
     public int Hp { get; set; }
-    public bool InAir { get; set; } = false;
     public bool IsAlive
     {
         get
@@ -11,38 +10,20 @@ public class Character
         }
     }
     public Rectangle rect;
-    protected int ground = 500;
-    protected float gravity;
-    protected Vector2 speed = new Vector2(4, 8);
+    protected Vector2 speed = new Vector2(6, 6);
     public static Player p;
     public static Enemy e;
     public int MarginY { get; set; }
 
     public virtual void Update()
     {
-        SetGravity();
-        CheckGround();
+        Vector2.Normalize(speed);
         a.Anim((int)a.animations.ani[a.Name].X, (int)a.animations.ani[a.Name].Y, a.animations.ani[a.Name].Z, MarginY);
     }
 
     public virtual void Draw()
     {
         a.Draw(this);
-    }
-
-    public void SetGravity()
-    {
-        rect.y += gravity;
-        gravity += 0.3f;
-    }
-    public void CheckGround()
-    {
-        if (rect.y + rect.height >= ground)
-        {
-            rect.y = ground - rect.height;
-            gravity = 0;
-            InAir = false;
-        }
     }
 
     public void MapCollision()
@@ -58,13 +39,11 @@ public class Character
 
                 if (top < bottom && top < left && top < right) //Kollar om spelaren kolliderar på toppen av blocket
                 {
-                    rect.y = block.rect.y - rect.height;
-                    gravity = 0;
-                    InAir = false;
+                    rect.y -= speed.Y;
                 }
                 else if (bottom < top && bottom < left && bottom < right) //Kollar om spelaren kolliderar på undersidan av blocket
                 {
-                    rect.y = block.rect.y + block.rect.height;
+                    rect.y += speed.Y;
                 }
                 else if (left < right) //Kollar om spelare kolliderar på vänster om blocket
                 {

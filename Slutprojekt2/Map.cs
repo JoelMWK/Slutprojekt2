@@ -2,6 +2,7 @@ public class Map
 {
     public List<Block> blocks = new List<Block>(); //Lista av alla block
     public int[][] Level { get; set; } //array av array
+    private Random random = new Random();
     public void LoadMap(string filePath)
     {
         string jsonText = File.ReadAllText(filePath); //Läser all text i filePath som är definerat i program.cs
@@ -15,6 +16,12 @@ public class Map
                 {
                     Block b = new Block(x, y, m.Level[y][x]); //Skapar ett block med blockSize och positionen
                     blocks.Add(b); //Lägger till blocket i listan blocks
+                }
+                else
+                {
+                    m.Level[y][x] = random.Next(4, 7);
+                    Block b = new Block(x, y, m.Level[y][x]);
+                    blocks.Add(b);
                 }
             }
         }

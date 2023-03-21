@@ -31,6 +31,7 @@ public class ClassSelector
                 classIndex = 1;
             }
         }
+
         Character.p = players[classIndex];
 
         Raylib.BeginDrawing();

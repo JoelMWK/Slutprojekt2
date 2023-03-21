@@ -9,20 +9,26 @@ public class Camera
             return Camera2D = new Camera2D()
             {
                 offset = new Vector2(screenWidth / 2, screenHeight / 2),
-                target = new Vector2(Character.p.rect.x, screenHeight / 2),
+                target = new Vector2(Character.p.rect.x, Character.p.rect.y),
                 rotation = 0.0f,
                 zoom = 1.0f
             };
         }
-        set { }
+        private set { }
     }
 
-    public Vector2 WorldToScreen(Vector2 position)
+    public Vector2 WorldToScreen
     {
-        return Raylib.GetWorldToScreen2D(position, Camera2D);
+        get
+        {
+            return Raylib.GetWorldToScreen2D(new Vector2(Character.p.rect.x, Character.p.rect.y), Camera2D);
+        }
     }
-    public Vector2 ScreenToWorld(Vector2 position)
+    public Vector2 ScreenToWorld
     {
-        return Raylib.GetScreenToWorld2D(position, Camera2D);
+        get
+        {
+            return Raylib.GetScreenToWorld2D(new Vector2(Character.p.rect.x, Character.p.rect.y), Camera2D);
+        }
     }
 }

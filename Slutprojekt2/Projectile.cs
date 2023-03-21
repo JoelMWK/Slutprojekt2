@@ -3,48 +3,43 @@ public class Projectile
     public bool IsActive { get; set; }
     private static Texture2D arrow = Raylib.LoadTexture("./images/character/Items/arrow.png");
     private Vector2 origin;
-    private Rectangle rect = new Rectangle(0, 0, arrow.width, arrow.height);
-    private Rectangle source = new Rectangle(0, 0, arrow.width, arrow.height);
-    private float gravity;
-    private int dir;
+    private Rectangle rect;
+    private float angle;
+    private Vector2 velocity;
+    private Vector2 pos;
 
-    public Projectile(Player p)
+    public Projectile(Player p, Vector2 pos)
     {
         IsActive = false;
-        origin = p.camera.WorldToScreen(new Vector2(p.rect.x + 40 * dir, p.rect.y + 30));
-        dir = p.a.direction;
-        source.width *= dir;
+        this.pos = pos;
+        origin = new Vector2(p.rect.x + 40, p.rect.y + 30);
+        angle = MathF.Atan2(pos.Y - origin.Y, pos.X - origin.X);
     }
 
-    public void Update(int velocity)
+    public void Update(Vector2 speed)
     {
-        origin.X += velocity * dir;
+        origin += velocity;
 
         rect.x = origin.X;
         rect.y = origin.Y;
 
-        //ProjectileDrop();
+        velocity.X = speed.X * MathF.Cos(angle);
+        velocity.Y = speed.Y * MathF.Sin(angle);
+
         Collision();
-        Draw();
     }
 
-    private void ProjectileDrop()
+    public void Draw()
     {
-        origin.Y += gravity;
-        gravity += 0.05f;
-    }
-
-    private void Draw()
-    {
-        Raylib.DrawTextureRec(arrow, source, origin, Color.WHITE);
+        Raylib.DrawTextureEx(arrow, new Vector2(rect.x, rect.y), angle * 180 / MathF.PI, 1, Color.WHITE);
     }
 
     private void Collision()
     {
         Timer.Update();
-        foreach (Enemy e in EnemySpawner.enemies)
+        foreach (Enemy e in EnemySpawner.Enemies)
         {
-            if (CheckCollisionRecs(e.rect) && Timer.CheckTimer(0.5f))
+            if (CheckCollisionPointRec(e.rect) && Timer.CheckTimer(0.5f))
             {
                 e.Hp--;
                 IsActive = false;
@@ -53,20 +48,15 @@ public class Projectile
         }
         foreach (Block block in Block.blockList)
         {
-            if (block.CheckCollisionRecs(rect))
+            if (block.CheckCollisionPointRec(origin))
             {
                 IsActive = false;
             }
         }
-
-        /*  if (rect.x >= Raylib.GetScreenWidth() || rect.x < 0 || rect.y >= Raylib.GetScreenHeight())
-         {
-             IsActive = false;
-         } */
     }
 
-    public bool CheckCollisionRecs(Rectangle other)
+    public bool CheckCollisionPointRec(Rectangle other)
     {
-        return Raylib.CheckCollisionRecs(rect, other);
+        return Raylib.CheckCollisionPointRec(origin, other);
     }
 }

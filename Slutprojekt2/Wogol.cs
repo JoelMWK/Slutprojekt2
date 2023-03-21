@@ -2,8 +2,8 @@ public class Wogol : Enemy
 {
     public Wogol()
     {
-        rect = new Rectangle(0, 0, 32, 32);
-        Hp = 4;
+        rect = new Rectangle(100, 100, 32, 32);
+        Hp = 1;
         a.source.width = 32;
         a.source.height = 32;
         MarginY = 167;

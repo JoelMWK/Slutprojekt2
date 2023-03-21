@@ -1,30 +1,38 @@
 public class EnemySpawner
 {
-    public static List<Enemy> enemies = new List<Enemy>();
-    Random random = new Random();
+    public static List<Enemy> Enemies { get; set; } = new List<Enemy>();
+    private Random random = new Random();
 
     public EnemySpawner()
     {
-        enemies.Add(new Demon());
-        Character.e = enemies[0];
+        Enemies.Add(new Demon());
     }
 
     public void Update()
     {
-        foreach (Enemy e in enemies)
+        foreach (Enemy e in Enemies)
         {
+            Character.e = e;
             e.Update();
             e.MapCollision();
+            if (!e.IsAlive && random.Next(1, 5) == 4)
+            {
+                Coin.Coins.Add(new Coin((int)e.rect.x, (int)e.rect.y));
+            }
         }
-        if (Raylib.IsMouseButtonPressed(MouseButton.MOUSE_RIGHT_BUTTON)) enemies.Add(new Wogol());
-
-        enemies.RemoveAll(e => !e.IsAlive);
+        if (Raylib.IsMouseButtonPressed(MouseButton.MOUSE_RIGHT_BUTTON)) Enemies.Add(new Wogol());
+        Enemies.RemoveAll(e => !e.IsAlive);
     }
     public void Draw()
     {
-        foreach (Enemy e in enemies)
+        foreach (Enemy e in Enemies)
         {
             e.Draw();
+        }
+        foreach (Coin c in Coin.Coins)
+        {
+            c.Update();
+            c.Draw();
         }
     }
 }

@@ -1,10 +1,11 @@
 public class Bow : Weapon
 {
     private List<Projectile> projectiles = new List<Projectile>();
-    private int speed = 10;
-    private int arrowCount = 1;
+    private Vector2 speed = new Vector2(8, 8);
+    private int arrowCount = 10;
     private Rectangle source = new Rectangle(0, 0, 14, 50);
     private Vector2 pos;
+    private float angle;
 
     public Bow()
     {
@@ -14,6 +15,9 @@ public class Bow : Weapon
     }
     public void Update(Player p)
     {
+        pos = MousePosition();
+        angle = MathF.Atan2(pos.Y - p.rect.y, pos.X - p.rect.x) * 180 / MathF.PI;
+
         if (Raylib.IsMouseButtonPressed(0))
         {
             Shoot(p);
@@ -28,7 +32,7 @@ public class Bow : Weapon
 
     public void Shoot(Player p)
     {
-        Projectile projectile = new(p);
+        Projectile projectile = new(p, pos);
 
         if (projectiles.Count() < arrowCount)
         {
@@ -37,10 +41,20 @@ public class Bow : Weapon
         }
     }
 
+    private Vector2 MousePosition()
+    {
+        return Raylib.GetScreenToWorld2D(Raylib.GetMousePosition(), Character.p.camera.Camera2D);
+    }
+
     public void Draw(Player p)
     {
-        if (p.a.direction == -1) pos = new Vector2(p.rect.x - 15, p.rect.y + 14);
-        else pos = new Vector2(p.rect.x + 45, p.rect.y + 14);
-        Raylib.DrawTextureRec(sprite, new Rectangle(source.x, source.y, source.width * p.a.direction, source.height), pos, Color.WHITE);
+        foreach (Projectile projectile in projectiles)
+        {
+            projectile.Draw();
+        }
+        //Raylib.DrawTextureEx(sprite, new Vector2(p.rect.x, p.rect.y), angle, 1, Color.WHITE);
+        Raylib.DrawTexturePro(sprite, source, new Rectangle(p.rect.x + 50, p.rect.y + 40, source.width, source.height), new Vector2(0, sprite.height / 2), angle, Color.WHITE);
+        Raylib.DrawLine((int)p.rect.x, (int)p.rect.y, (int)pos.X, (int)pos.Y, Color.BLACK);
+        //Raylib.DrawTextureRec(sprite, source, pos, Color.WHITE);
     }
 }
