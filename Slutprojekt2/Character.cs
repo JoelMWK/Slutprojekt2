@@ -1,7 +1,9 @@
 public class Character
 {
     public Animator a = new Animator();
-    public int Hp { get; set; }
+    public float Hp { get; set; }
+    public float Damage { get; set; }
+    public int MarginY { get; set; }
     public bool IsAlive
     {
         get
@@ -9,16 +11,15 @@ public class Character
             return Hp > 0;
         }
     }
+    public static Player P { get; set; }
+    public static Enemy E { get; set; }
     public Rectangle rect;
     protected Vector2 speed = new Vector2(6, 6);
-    public static Player p;
-    public static Enemy e;
-    public int MarginY { get; set; }
 
     public virtual void Update()
     {
         Vector2.Normalize(speed);
-        a.Anim((int)a.animations.ani[a.Name].X, (int)a.animations.ani[a.Name].Y, a.animations.ani[a.Name].Z, MarginY);
+        a.Anim(a.animations.ani[a.Name].col, a.animations.ani[a.Name].row, a.animations.ani[a.Name].frameSpeed, MarginY);
     }
 
     public virtual void Draw()
@@ -57,16 +58,29 @@ public class Character
         }
     }
 
+    public void GetHit(float damageAmount)
+    {
+        Hp -= damageAmount;
+    }
+
     public bool IsVisible(int distance)
     {
-        return Vector2.Distance(new Vector2(p.rect.x, p.rect.y), new Vector2(e.rect.x, e.rect.y)) <= distance;
+        return Vector2.Distance(new Vector2(P.rect.x, P.rect.y), new Vector2(E.rect.x, E.rect.y)) <= distance;
     }
-    public bool LeftSide()
+    public bool DirectionLeft()
     {
-        return e.rect.x >= p.rect.x;
+        return E.rect.x > P.rect.x;
     }
-    public bool RightSide()
+    public bool DirectionRight()
     {
-        return e.rect.x <= p.rect.x;
+        return E.rect.x < P.rect.x;
+    }
+    public bool DirectionUp()
+    {
+        return E.rect.y > P.rect.y;
+    }
+    public bool DirectionDown()
+    {
+        return E.rect.y < P.rect.y;
     }
 }

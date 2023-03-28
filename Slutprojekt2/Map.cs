@@ -12,7 +12,7 @@ public class Map
         {
             for (int x = 0; x < m.Level[y].Length; x++) //Går igenom x-led
             {
-                if (m.Level[y][x] > 0) //Om något value är större än 0 utförs kodblocket. Annars är det luft
+                if (m.Level[y][x] > 0)
                 {
                     Block b = new Block(x, y, m.Level[y][x]); //Skapar ett block med blockSize och positionen
                     blocks.Add(b); //Lägger till blocket i listan blocks

@@ -12,7 +12,7 @@ public class Projectile
     {
         IsActive = false;
         this.pos = pos;
-        origin = new Vector2(p.rect.x + 40, p.rect.y + 30);
+        origin = new Vector2(p.rect.x + p.rect.width / 2, p.rect.y + p.rect.height / 2);
         angle = MathF.Atan2(pos.Y - origin.Y, pos.X - origin.X);
     }
 
@@ -36,16 +36,6 @@ public class Projectile
 
     private void Collision()
     {
-        Timer.Update();
-        foreach (Enemy e in EnemySpawner.Enemies)
-        {
-            if (CheckCollisionPointRec(e.rect) && Timer.CheckTimer(0.5f))
-            {
-                e.Hp--;
-                IsActive = false;
-                Timer.ResetTimer();
-            }
-        }
         foreach (Block block in Block.blockList)
         {
             if (block.CheckCollisionPointRec(origin))

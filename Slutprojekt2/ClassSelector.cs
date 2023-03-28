@@ -6,8 +6,8 @@ public class ClassSelector
         new Knight(),
     };
 
-    public bool selected;
-    public int classIndex;
+    public bool Selected { get; set; }
+    public int ClassIndex { get; set; }
     private static Texture2D[] images = {
         Raylib.LoadTexture("./images/character/archer.png"),
         Raylib.LoadTexture("./images/character/knight.png"),
@@ -22,17 +22,17 @@ public class ClassSelector
         {
             if (Raylib.CheckCollisionPointRec(Raylib.GetMousePosition(), buttonA))
             {
-                selected = true;
-                classIndex = 0;
+                Selected = true;
+                ClassIndex = 0;
             }
             else if (Raylib.CheckCollisionPointRec(Raylib.GetMousePosition(), buttonB))
             {
-                selected = true;
-                classIndex = 1;
+                Selected = true;
+                ClassIndex = 1;
             }
         }
 
-        Character.p = players[classIndex];
+        Character.P = players[ClassIndex];
 
         Raylib.BeginDrawing();
         Raylib.ClearBackground(Color.BLACK);
@@ -46,12 +46,11 @@ public class ClassSelector
     }
     public void Update()
     {
-        players[classIndex].Update();
-        players[classIndex].MapCollision();
+        players[ClassIndex].Update();
+        players[ClassIndex].MapCollision();
     }
-
     public void Draw()
     {
-        players[classIndex].Draw();
+        players[ClassIndex].Draw();
     }
 }

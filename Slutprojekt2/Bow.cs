@@ -1,5 +1,6 @@
 public class Bow : Weapon
 {
+    private Timer timer = new Timer();
     private List<Projectile> projectiles = new List<Projectile>();
     private Vector2 speed = new Vector2(8, 8);
     private int arrowCount = 10;
@@ -26,6 +27,16 @@ public class Bow : Weapon
         foreach (Projectile projectile in projectiles)
         {
             projectile.Update(speed);
+            timer.Update();
+            foreach (Enemy e in EnemySpawner.Enemies)
+            {
+                if (projectile.CheckCollisionPointRec(e.rect) && timer.CheckTimer(0.5f))
+                {
+                    e.GetHit(Damage);
+                    IsActive = false;
+                    timer.ResetTimer();
+                }
+            }
         }
         projectiles.RemoveAll(projectile => !projectile.IsActive);
     }
@@ -43,7 +54,7 @@ public class Bow : Weapon
 
     private Vector2 MousePosition()
     {
-        return Raylib.GetScreenToWorld2D(Raylib.GetMousePosition(), Character.p.camera.Camera2D);
+        return Raylib.GetScreenToWorld2D(Raylib.GetMousePosition(), Character.P.Cam.Camera2D);
     }
 
     public void Draw(Player p)
@@ -52,9 +63,7 @@ public class Bow : Weapon
         {
             projectile.Draw();
         }
-        //Raylib.DrawTextureEx(sprite, new Vector2(p.rect.x, p.rect.y), angle, 1, Color.WHITE);
-        Raylib.DrawTexturePro(sprite, source, new Rectangle(p.rect.x + 50, p.rect.y + 40, source.width, source.height), new Vector2(0, sprite.height / 2), angle, Color.WHITE);
+        Raylib.DrawTexturePro(sprite, source, new Rectangle(p.rect.x + 20, p.rect.y + p.rect.height / 2, source.width, source.height), new Vector2(-40, 25), angle, Color.WHITE);
         Raylib.DrawLine((int)p.rect.x, (int)p.rect.y, (int)pos.X, (int)pos.Y, Color.BLACK);
-        //Raylib.DrawTextureRec(sprite, source, pos, Color.WHITE);
     }
 }

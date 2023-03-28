@@ -1,10 +1,11 @@
 public class Knight : Player
 {
-    Sword sword = new Sword();
+    private Sword sword = new Sword();
     public Knight()
     {
+        rect = new Rectangle(400, 200, 45, 66);
         a.source.width = 45;
-        a.source.height = 81;
+        a.source.height = 66;
     }
 
     public override void Update()

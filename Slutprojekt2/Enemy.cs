@@ -1,29 +1,62 @@
 public class Enemy : Character
 {
+    public int DropChance { get; set; }
+    private Random random = new Random();
+    public int Rx
+    {
+        get
+        {
+            return random.Next(100, 900);
+        }
+        private set { }
+    }
+    public int Ry
+    {
+        get
+        {
+            return random.Next(100, 900);
+        }
+        private set { }
+    }
     public Enemy()
     {
         a.currentTexture = Animation.spriteSheetE;
     }
     public override void Update()
     {
-        if (IsVisible(250))
+        if (IsVisible(700))
         {
-            if (RightSide())
+            if (DirectionUp())
             {
-                rect.x += speed.X;
+                a.moving = true;
+                rect.y -= speed.Y;
+            }
+            if (DirectionDown())
+            {
+                a.moving = true;
+                rect.y += speed.Y;
+            }
+            if (DirectionRight())
+            {
                 a.direction.X = 1;
                 a.moving = true;
+                rect.x += speed.X;
             }
-            else
+            if (DirectionLeft())
             {
-                rect.x -= speed.X;
                 a.direction.X = -1;
                 a.moving = true;
+                rect.x -= speed.X;
             }
         }
         else a.moving = false;
 
         base.Update();
+    }
+
+    public bool CheckCollisionRecs(Rectangle other)
+    {
+        return Raylib.CheckCollisionRecs(rect, other);
     }
     public override void Draw()
     {

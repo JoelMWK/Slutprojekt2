@@ -2,11 +2,13 @@ public class Demon : Enemy
 {
     public Demon()
     {
-        rect = new Rectangle(100, 100, 64, 83);
+        rect = new Rectangle(Rx, Ry, 64, 83);
         Hp = 8;
+        Damage = 3;
+        DropChance = 1;
         a.source.width = 64;
         a.source.height = 83;
-        speed.X = 2;
+        speed = new Vector2(2, 2);
     }
 
     public override void Update()

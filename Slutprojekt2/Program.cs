@@ -13,10 +13,9 @@ EnemySpawner enemySpawner = new EnemySpawner();
 Map map = new Map();
 map.LoadMap("./stages/stage1.json");
 
-
 while (!Raylib.WindowShouldClose())
 {
-    if (!classSelector.selected)
+    if (!classSelector.Selected)
     {
         classSelector.ChoosePlayer();
     }
@@ -29,7 +28,7 @@ while (!Raylib.WindowShouldClose())
         //Grafik
         Raylib.BeginDrawing();
         Raylib.ClearBackground(Color.SKYBLUE);
-        Raylib.BeginMode2D(ClassSelector.players[classSelector.classIndex].camera.Camera2D);
+        Raylib.BeginMode2D(ClassSelector.players[classSelector.ClassIndex].Cam.Camera2D);
 
         map.DrawMap();
         enemySpawner.Draw();

@@ -10,19 +10,35 @@ public class EnemySpawner
 
     public void Update()
     {
+        SpawnEnemy();
         foreach (Enemy e in Enemies)
         {
-            Character.e = e;
+            Character.E = e;
             e.Update();
             e.MapCollision();
-            if (!e.IsAlive && random.Next(1, 5) == 4)
+            if (!e.IsAlive && random.Next(1, e.DropChance + 1) == e.DropChance)
             {
                 Coin.Coins.Add(new Coin((int)e.rect.x, (int)e.rect.y));
             }
         }
-        if (Raylib.IsMouseButtonPressed(MouseButton.MOUSE_RIGHT_BUTTON)) Enemies.Add(new Wogol());
         Enemies.RemoveAll(e => !e.IsAlive);
     }
+
+    private void SpawnEnemy()
+    {
+        if (random.Next(1, 100) == 5 && Vector2.Distance(new Vector2(Character.E.rect.x, Character.E.rect.y), new Vector2(Character.P.rect.x, Character.P.rect.y)) >= 100)
+        {
+            if (random.Next(1, 100) > 80)
+            {
+                Enemies.Add(new Demon());
+            }
+            else
+            {
+                Enemies.Add(new Wogol());
+            }
+        }
+    }
+
     public void Draw()
     {
         foreach (Enemy e in Enemies)

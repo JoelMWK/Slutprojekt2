@@ -1,17 +1,17 @@
 public class Timer
 {
-    public static float time;
+    public float Time { get; set; }
 
-    public static void Update()
+    public void Update()
     {
-        time += Raylib.GetFrameTime();
+        Time += Raylib.GetFrameTime();
     }
-    public static bool CheckTimer(float cooldown)
+    public bool CheckTimer(float cooldown)
     {
-        return time >= cooldown;
+        return Time >= cooldown;
     }
-    public static float ResetTimer()
+    public float ResetTimer()
     {
-        return time = 0;
+        return Time = 0;
     }
 }

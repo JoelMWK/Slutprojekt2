@@ -9,7 +9,7 @@ public class Camera
             return Camera2D = new Camera2D()
             {
                 offset = new Vector2(screenWidth / 2, screenHeight / 2),
-                target = new Vector2(Character.p.rect.x, Character.p.rect.y),
+                target = new Vector2(Character.P.rect.x, Character.P.rect.y),
                 rotation = 0.0f,
                 zoom = 1.0f
             };
@@ -21,14 +21,14 @@ public class Camera
     {
         get
         {
-            return Raylib.GetWorldToScreen2D(new Vector2(Character.p.rect.x, Character.p.rect.y), Camera2D);
+            return Raylib.GetWorldToScreen2D(new Vector2(Character.P.rect.x, Character.P.rect.y), Camera2D);
         }
     }
     public Vector2 ScreenToWorld
     {
         get
         {
-            return Raylib.GetScreenToWorld2D(new Vector2(Character.p.rect.x, Character.p.rect.y), Camera2D);
+            return Raylib.GetScreenToWorld2D(new Vector2(Character.P.rect.x, Character.P.rect.y), Camera2D);
         }
     }
     public Vector2 ScreenToWorldHud

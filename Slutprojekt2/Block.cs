@@ -1,20 +1,20 @@
 public class Block
 {
-   private TileInfo tileInfo = new TileInfo();
-    public static List<Block> blockList = new List<Block>();
-    protected static Texture2D tileset = Raylib.LoadTexture("./images/tile/tileset.png");
-    public int Type { get; set; }
-    public Rectangle rect;
+    private TileInfo tileInfo = new TileInfo();
     private Rectangle source;
+    protected static Texture2D tileset = Raylib.LoadTexture("./images/tile/tileset.png");
     protected float tileSize = 64;
+    public Rectangle rect;
+    public static List<Block> blockList = new List<Block>();
+    public int Type { get; set; }
 
     public Block(int x, int y, int type) //Konstruktor för alla blocks som har specifika värden inmatade
     {
         Type = type; //Type är en int som tar in ett value från map.cs
         rect = new Rectangle(x * tileSize, y * tileSize, tileSize, tileSize);
         source = rect;
-        if (!tileInfo.tile[Type].isFloor) // kollar om en tile är floor eller inte
-            blockList.Add(this);        // blockList.Add(rect = new Rectangle(x * tileSize, y * tileSize, tileSize, tileSize));
+        if (!tileInfo.tile[Type].isFloor && !tileInfo.tile[Type].isTrap) // kollar om en tile är floor eller inte
+        { blockList.Add(this); }
 
         source.x = tileInfo.tile[Type].colRow.X * source.width;
         source.y = tileInfo.tile[Type].colRow.Y * source.height;
