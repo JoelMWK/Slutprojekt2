@@ -1,14 +1,14 @@
 public class ClassSelector
 {
-    public static List<Player> players = new List<Player>()
+    public static List<Player> players = new List<Player>() //Lista av de två olika player klasserna
     {
         new Archer(),
         new Knight(),
     };
 
-    public bool Selected { get; set; }
-    public int ClassIndex { get; set; }
-    private static Texture2D[] images = {
+    public bool Selected { get; set; } //Bool om man har valt en klass eller inte
+    public int ClassIndex { get; set; } //Index för klassen
+    private static Texture2D[] images = { //BIlder
         Raylib.LoadTexture("./images/character/archer.png"),
         Raylib.LoadTexture("./images/character/knight.png"),
     };
@@ -16,7 +16,7 @@ public class ClassSelector
     private Rectangle buttonA = new Rectangle(250, 250, 150, 225);
     private Rectangle buttonB = new Rectangle(500, 250, 150, 225);
 
-    public void ChoosePlayer()
+    public void ChoosePlayer() //Kollar vilken klass man väljer med muspekaren och ett klick
     {
         if (Raylib.IsMouseButtonPressed(0))
         {
@@ -32,7 +32,7 @@ public class ClassSelector
             }
         }
 
-        Character.P = players[ClassIndex];
+        Character.P = players[ClassIndex]; //Bestämmer vilken av klasserna som ska vara player.
 
         Raylib.BeginDrawing();
         Raylib.ClearBackground(Color.BLACK);
@@ -44,12 +44,12 @@ public class ClassSelector
 
         Raylib.EndDrawing();
     }
-    public void Update()
+    public void Update() //Updaterar klassen som blev vald beroende på classindex.
     {
         players[ClassIndex].Update();
         players[ClassIndex].MapCollision();
     }
-    public void Draw()
+    public void Draw() // Ritar ut player
     {
         players[ClassIndex].Draw();
     }

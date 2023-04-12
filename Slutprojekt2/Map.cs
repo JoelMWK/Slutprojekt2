@@ -17,7 +17,7 @@ public class Map
                     Block b = new Block(x, y, m.Level[y][x]); //Skapar ett block med blockSize och positionen
                     blocks.Add(b); //Lägger till blocket i listan blocks
                 }
-                else
+                else //Slumpar mellan de 3 olika floor tiles för att generera golvet.
                 {
                     m.Level[y][x] = random.Next(4, 7);
                     Block b = new Block(x, y, m.Level[y][x]);

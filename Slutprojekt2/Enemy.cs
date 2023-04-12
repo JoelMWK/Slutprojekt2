@@ -2,7 +2,7 @@ public class Enemy : Character
 {
     public int DropChance { get; set; }
     private Random random = new Random();
-    public int Rx
+    public int Rx //Random x position
     {
         get
         {
@@ -10,7 +10,7 @@ public class Enemy : Character
         }
         private set { }
     }
-    public int Ry
+    public int Ry //Random y position
     {
         get
         {
@@ -18,38 +18,38 @@ public class Enemy : Character
         }
         private set { }
     }
-    public Enemy()
+    public Enemy() //Konstructor för enemy
     {
-        a.currentTexture = Animation.spriteSheetE;
+        a.currentTexture = Animation.spriteSheetE; //Bestämmer vilken spritesheet som enmies ska använda
     }
     public override void Update()
     {
-        if (IsVisible(700))
-        {
+        if (IsVisible(700)) //Om spelaren är synlig för enemy
+        {//Bestämmer vilket håll enemy ska gå.
             if (DirectionUp())
             {
-                a.moving = true;
+                a.Moving = true;
                 rect.y -= speed.Y;
             }
             if (DirectionDown())
             {
-                a.moving = true;
+                a.Moving = true;
                 rect.y += speed.Y;
             }
             if (DirectionRight())
             {
                 a.direction.X = 1;
-                a.moving = true;
+                a.Moving = true;
                 rect.x += speed.X;
             }
             if (DirectionLeft())
             {
                 a.direction.X = -1;
-                a.moving = true;
+                a.Moving = true;
                 rect.x -= speed.X;
             }
         }
-        else a.moving = false;
+        else a.Moving = false;
 
         base.Update();
     }
@@ -58,9 +58,8 @@ public class Enemy : Character
     {
         return Raylib.CheckCollisionRecs(rect, other);
     }
-    public override void Draw()
+    public override void Draw() //Ritar ut enemey
     {
-        Raylib.DrawRectangleLines((int)rect.x, (int)rect.y, (int)rect.width, (int)rect.height, Color.YELLOW);
         base.Draw();
     }
 }

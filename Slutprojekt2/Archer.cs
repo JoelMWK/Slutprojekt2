@@ -13,7 +13,7 @@ public class Archer : Player
     {
         bow.Update(this);
         base.Update();
-        if (a.moving) a.Name = "A_Run";
+        if (a.Moving) a.Name = "A_Run";
         else a.Name = "A_Idle";
     }
     public override void Draw()

@@ -1,10 +1,10 @@
 public class Character
 {
     public Animator a = new Animator();
-    public float Hp { get; set; }
-    public float Damage { get; set; }
-    public int MarginY { get; set; }
-    public bool IsAlive
+    public float Hp { get; set; } //Hp för aalla karaktärer
+    public float Damage { get; set; } //Damage för allla karaktärer
+    public int MarginY { get; set; } //MarginY som används för spritesheet animation om de två olika gubbarna har olika storlekar
+    public bool IsAlive //Om karaktären är vid liv elelr inte
     {
         get
         {
@@ -16,18 +16,17 @@ public class Character
     public Rectangle rect;
     protected Vector2 speed = new Vector2(6, 6);
 
-    public virtual void Update()
+    public virtual void Update() //Updaterar animationerna för karaktärerna
     {
-        Vector2.Normalize(speed);
         a.Anim(a.animations.ani[a.Name].col, a.animations.ani[a.Name].row, a.animations.ani[a.Name].frameSpeed, MarginY);
     }
 
-    public virtual void Draw()
+    public virtual void Draw() //Ritar ut karaktären
     {
         a.Draw(this);
     }
 
-    public void MapCollision()
+    public void MapCollision() //Mapp kollision för spelare och enemy
     {
         foreach (Block block in Block.blockList)
         {
@@ -58,15 +57,16 @@ public class Character
         }
     }
 
-    public void GetHit(float damageAmount)
+    public void GetHit(float damageAmount) // Metod för ta skada
     {
         Hp -= damageAmount;
     }
 
-    public bool IsVisible(int distance)
+    public bool IsVisible(int distance) //Om spelaren är synlig beroende på distance
     {
         return Vector2.Distance(new Vector2(P.rect.x, P.rect.y), new Vector2(E.rect.x, E.rect.y)) <= distance;
     }
+    //Vilket håll enemy ska gå
     public bool DirectionLeft()
     {
         return E.rect.x > P.rect.x;

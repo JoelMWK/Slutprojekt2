@@ -1,8 +1,12 @@
 public class TileInfo
 {
+    //Dictionary som sparar information för alla tiles.
+    //colRow - x och y på spritesheet.
+    //bool isFloor - Om tilen är golv för att den inte ska ha någon kollision.
+    //bool isTrap - Om tilen är en trap, eftersom den ska ha en annorlunda kollision jämfört med resten av blocken.
     public Dictionary<int, (Vector2 colRow, bool isFloor, bool isTrap)> tile = new Dictionary<int, (Vector2 colRow, bool isFloor, bool isTrap)>();
 
-    public TileInfo()
+    public TileInfo() //Konstructor för TIleinfo. Lägger till blocken in i dictionaryn, med olika values.
     {
         tile.Add(1, (new Vector2(0, 0), false, false));
         tile.Add(2, (new Vector2(1, 0), false, false));

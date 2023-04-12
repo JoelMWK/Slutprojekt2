@@ -1,12 +1,12 @@
 public class Block
 {
-    private TileInfo tileInfo = new TileInfo();
+    public TileInfo tileInfo = new TileInfo();
     private Rectangle source;
     protected static Texture2D tileset = Raylib.LoadTexture("./images/tile/tileset.png");
     protected float tileSize = 64;
     public Rectangle rect;
     public static List<Block> blockList = new List<Block>();
-    public int Type { get; set; }
+    public int Type { get; set; } //Vilken typ av block
 
     public Block(int x, int y, int type) //Konstruktor för alla blocks som har specifika värden inmatade
     {
@@ -16,6 +16,7 @@ public class Block
         if (!tileInfo.tile[Type].isFloor && !tileInfo.tile[Type].isTrap) // kollar om en tile är floor eller inte
         { blockList.Add(this); }
 
+        //Tar reda på vilken plats blocket befinenr sig i spritesheetet
         source.x = tileInfo.tile[Type].colRow.X * source.width;
         source.y = tileInfo.tile[Type].colRow.Y * source.height;
     }

@@ -7,7 +7,6 @@ global using System.Text.Json;
 Raylib.InitWindow(900, 540, "Topdown");
 Raylib.SetTargetFPS(60);
 
-//Camera camera = new Camera();
 ClassSelector classSelector = new ClassSelector();
 EnemySpawner enemySpawner = new EnemySpawner();
 Map map = new Map();
